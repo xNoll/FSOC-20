@@ -1,0 +1,34 @@
+user: writes value and click send
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note
+new note is added to the list of notes on the server
+server->browser: 302
+
+//what follows is the same as the code posted in the diagram given in 0.4 because is doing the same but I added a note underneath css
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+server-->browser: main.css
+
+note over browser:
+browser now has the properties in the css file such the font color and the padding
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+server-->browser: main.js
+
+note over browser:
+browser starts executing js-code
+that requests JSON data from server 
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...] 
+
+//at the end of this JSON file should appear my note which is 'lul' along with the date which is '2020-05-27'
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note

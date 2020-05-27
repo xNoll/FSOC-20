@@ -1,0 +1,10 @@
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note:
+the code searches for the ElementById('notes_form')
+*when the submit button of the form has been clicked*
+the event handler calls the method e.preventDefault() preventing to do the ancient way of creating new notes (GET request)
+the event handler now creates the new note and appends it at the end of the notes list
+rerenders the notes list and send the newest note to the server
+the new note is modified before send it in the POST as a JSON data type with the attribute 'Content-type' -> 'application/json' in the header
+when the modification is done, the new note is sent as a JSON string using the method JSON.stringify() 
