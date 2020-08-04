@@ -5,7 +5,7 @@ const Person = (prop) =>{
     return (
         <div>
           <p>
-              {prop.name}
+              {prop.name}: {prop.phone}
           </p>
         </div>
       );

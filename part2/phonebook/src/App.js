@@ -3,26 +3,26 @@ import Person from './components/Person';
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', phone: '0000000' }
   ]) 
   const [ newName, setNewName ] = useState('')
+  const [ newPhone, setNewPhone ] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
-    const name = {
-      name: newName
-    }
-    if(persons.find(element => element.name === name.name)){
-      alert(`${name.name} is already on the list`)
-    } else {
-      setPersons(persons.concat(name))
-      setNewName('')
-    }
-    
-  }
 
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
+    const person = {
+      name: newName,
+      phone: newPhone
+    }
+
+    if(persons.find(element => element.name === person.name)){
+      alert(`${person.name} is already on the list`)
+    } else {
+      setPersons(persons.concat(person))
+      setNewName('')
+      setNewPhone('')
+    }
   }
 
   return (
@@ -30,10 +30,16 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={addPerson}>
         <div>
-          <input
+          Name: <input
             value = {newName}
-            onChange={handleNameChange} 
+            onChange = {(event) => (setNewName(event.target.value))} 
           />
+        </div>
+        <div>
+          Phone: <input
+            value = {newPhone}
+            onChange = {(event) => (setNewPhone(event.target.value))}
+          />  
         </div>
         <div>
           <button type="submit">add</button>
@@ -43,7 +49,7 @@ const App = () => {
       <div>
         <ul>
         {persons.map(person => 
-          <Person name={person.name} key={person.name} />
+          <Person name={person.name} phone={person.phone} key={person.name} />
         )}
         </ul>
       </div>
