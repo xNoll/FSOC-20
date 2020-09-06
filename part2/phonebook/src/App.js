@@ -1,16 +1,22 @@
 import React, { useState} from 'react';
-import Person from './components/Person';
+import Persons from './components/Persons';
+import PersonForm from './components/PersonForm';
+import Filter from './components/Filter';
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas', phone: '0000000' }
+    { id:'Arto Hellas', name: 'Arto Hellas', phone: '040-123456' },
+    { id:'Ada Lovelace',name: 'Ada Lovelace', phone: '39-44-5323523' },
+    { id:'Dan Abramov', name: 'Dan Abramov', phone: '12-43-234345' },
+    { id:'Mary Poppendieck', name: 'Mary Poppendieck', phone: '39-23-6423122' }
   ]) 
   const [ newName, setNewName ] = useState('')
   const [ newPhone, setNewPhone ] = useState('')
+  const [ searchName, setSearchName ] = useState('')
 
+  //Add a single person
   const addPerson = (event) => {
     event.preventDefault()
-
     const person = {
       name: newName,
       phone: newPhone
@@ -25,34 +31,44 @@ const App = () => {
     }
   }
 
+  //Handles the events
+  const handleChange = (event, type) => {
+    switch(type) {
+      case "name":
+        setNewName(event.target.value)
+        break;
+      case "phone":
+        setNewPhone(event.target.value)
+        break;
+      default:
+        break;
+    }
+  }
+
+  //Deletes a person from the phonebook
+  const deletePerson = (id, person) => {
+    
+  }
+
+  //Main App
   return (
     <div>
-      <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          Name: <input
-            value = {newName}
-            onChange = {(event) => (setNewName(event.target.value))} 
-          />
-        </div>
-        <div>
-          Phone: <input
-            value = {newPhone}
-            onChange = {(event) => (setNewPhone(event.target.value))}
-          />  
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <div>
-        <ul>
-        {persons.map(person => 
-          <Person name={person.name} phone={person.phone} key={person.name} />
-        )}
-        </ul>
-      </div>
+      <h1>Phonebook</h1>
+      <Filter
+        searchName={searchName} setSearchName={setSearchName}
+      />
+      <PersonForm
+        nameValue={newName}
+        phoneValue={newPhone}
+        addPerson={(event) => addPerson(event)}
+        handleNameChange={(event) => handleChange(event, "name")}
+        handlePhoneChange={(event) => handleChange(event, "phone")}
+      />
+      <Persons 
+        persons={persons}
+        searchName={searchName}
+        deletePerson={deletePerson}
+      />
     </div>
   )
 }
