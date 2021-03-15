@@ -1,2 +1,2 @@
-# FSOC-20
-Repo for the 'Full Stack Open Course 2020'
+# FSOC-21
+Repo for the 'Full Stack Open Course 2021'
